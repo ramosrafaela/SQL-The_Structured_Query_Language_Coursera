@@ -1,0 +1,97 @@
+
+
+
+LAB 01
+------------------------------------------------------------------------------------------
+
+
+/* 2.1 List all the products in the Northwinds database showing productid,
+ productname, quantity per unit, unitprice, and unitsinstock. */
+
+SELECT * from "alanparadise/nw". "products";
+
+/* 2.2 For all employees at Northwinds, list the first name and last name concatenated
+ together with a blank space in-between, and the YEAR when they were hired.  */
+
+SELECT CONCAT(firstname, lastname) AS Name, hiredate, date_part('year', hiredate)
+    FROM "alanparadise/nw". "employees";
+
+/* 2.3 For all products in the Northwinds database, list the productname, unitprice, 
+unitsinstock,  and the total value of the inventory of that product as “Total Value”.
+(HINT:  total value = unitsinstock * unitprice.)   */
+
+SELECT productname, unitprice, unitsinstock, 
+    (unitsinstock * unitprice) AS "Total Value" 
+    FROM "alanparadise/nw". "products";
+
+/* 2.4 For all employees at Northwinds, list the first name and last name concatenated
+ together with a blank space in-between with a column header “Name”, and the name of 
+ the month (spelled out) for each employee’s birthday.    */
+
+SELECT CONCAT (firstname,' ', lastname) AS "Name", TO_CHAR(birthdate, 'month')
+    FROM "alanparadise/nw". "employees";
+
+
+
+LAB 02
+------------------------------------------------------------------------------------------
+
+
+
+/* 2.1 List the customerid, companyname, and country for all customers NOT in the 
+U.S.A.*/
+
+SELECT customerid, companyname, country
+    FROM "alanparadise/nw". "customers"
+    WHERE NOT country = 'USA';    
+
+
+/* 2.2 For all products in the Northwinds database, list the productname, unitprice, 
+unitsinstock,  and the total value of the inventory of that product as “Total Value” 
+for all products with a Total Value greater than $1000.  
+(HINT:  total value = unitsinstock * unitprice) */
+
+SELECT productname, unitprice, unitsinstock,
+    (unitsinstock * unitprice) AS "Total Value" 
+    FROM "alanparadise/nw". "products"
+    WHERE (unitsinstock * unitprice) > 1000;
+
+
+/* 2.3 List the productid, productname, and quantityperunit for all products that 
+come in bottles.    */
+
+SELECT productid, quantityperunit
+    FROM "alanparadise/nw". "products"
+    WHERE quantityperunit LIKE '%bottles';
+
+/* 2.4 List the productid, productname, and unitprice for all products whose 
+categoryid is an ODD number.  
+ (HINT:  categoryid is a one digit integer less than 9 …)  */
+
+SELECT productid, productname, unitprice
+    FROM "alanparadise/nw". "products"
+    WHERE categoryid IN (1,3,5,7);
+
+
+/* List the orderid,  customerid, and shippeddate for orders that shipped to Canada
+  in December 1996 through the end of  January 1997.  */
+
+select orderid, customerid, shippeddate
+	    from "alanparadise/nw"."orders"
+	    where shipcountry = 'Canada'
+		and shippeddate between '1996-12-01' and '1997-01-31';
+
+
+LAB 02
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
