@@ -85,6 +85,25 @@ select orderid, customerid, shippeddate
 LAB 03
 ------------------------------------------------------------------------------------------
 
+/* 2.1 List the employeeid, firstname + lastname concatenated as ‘employee’,
+ and the age of the employee  when they were hired.   */
+
+SELECT employeeid, CONCAT(firstname,' ',lastname) AS employee,
+    age(hiredate, birthdate)::text AS HIRE_AGE
+    FROM "alanparadise/nw". "employees";
+
+    
+/* 2.2 Run a query to calculate your age as of today.  */
+
+SELECT age('2022-09-06', '1997-04-23')::text
+
+
+/* 2.3 List the customerid, companyname and country for 
+all customers whose region is NULL.  */
+
+SELECT customerid, companyname, country
+    FROM "alanparadise/nw". "customers"
+    WHERE region is NULL;
 
 
 
